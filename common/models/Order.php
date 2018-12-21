@@ -22,6 +22,7 @@ use Yii;
  */
 class Order extends \yii\db\ActiveRecord
 {
+    public $groupvlan;
     /**
      * {@inheritdoc}
      */
@@ -37,7 +38,7 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             [['service_id', 'area_id'], 'integer'],
-            [['number'], 'string', 'max' => 100],
+            [['number', 'groupvlan'], 'string', 'max' => 100],
             [['abonent', 'adress'], 'string', 'max' => 255],
             [['area_id'], 'exist', 'skipOnError' => true, 'targetClass' => Area::className(), 'targetAttribute' => ['area_id' => 'id']],
             [['service_id'], 'exist', 'skipOnError' => true, 'targetClass' => Service::className(), 'targetAttribute' => ['service_id' => 'id']],
@@ -98,4 +99,14 @@ class Order extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Vlan::className(), ['order_id' => 'id']);
     }
+ /*
+    public function getGroupvlan()
+    {
+        foreach ($this->area->groupvlans as $value) {
+            $arrGroupvlan[$value->id] = $value->name;
+        }
+        echo "Я здесь !!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+        return $arrGroupvlan;
+    }
+    */
 }

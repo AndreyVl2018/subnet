@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\VlanSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Vlans';
+$this->title = 'VLANs';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="vlan-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Vlan', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать VLAN', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

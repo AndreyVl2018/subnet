@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Groupvlan */
 
-$this->title = 'Update Groupvlan: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Groupvlans', 'url' => ['index']];
+$this->title = 'Изменение группы VLAN: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Группы VLAN', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Изменение';
 ?>
 <div class="groupvlan-update">
 
@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
+        'arrArea' => $arrArea
     ]) ?>
 
 </div>

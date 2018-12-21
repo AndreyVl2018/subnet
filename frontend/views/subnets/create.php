@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Subnet */
 
-$this->title = 'Create Subnet';
-$this->params['breadcrumbs'][] = ['label' => 'Subnets', 'url' => ['index']];
+$this->title = 'Создание подсети';
+$this->params['breadcrumbs'][] = ['label' => 'Подсети', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="subnet-create">
@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'arrArea' => $arrArea
     ]) ?>
 
 </div>

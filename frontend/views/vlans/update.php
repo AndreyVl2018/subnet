@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Vlan */
 
-$this->title = 'Update Vlan: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Vlans', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Изменение VLAN: ' . $model->number;
+$this->params['breadcrumbs'][] = ['label' => 'VLANs', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->number, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Изменение';
 ?>
 <div class="vlan-update">
 

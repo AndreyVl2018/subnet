@@ -109,6 +109,24 @@ class AreasController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionLists($id) {
+        $countArea = Area::find()
+                ->where(['area_id' => $id])
+                ->count();
+        $areas = Area::find()
+                ->where(['area_id' => $id])
+                ->orderBy('name ASC')
+                ->all();
+        if ($countArea > 0) {
+//            echo "<option>выбрать... </option>";
+            foreach ($areas as $area) {
+                echo "<option value='" . $area->area_id . "'>" . $area->name . "</option>";
+            }
+        } else {
+            echo "<option> - </option>";
+        }
+    }
+
     /**
      * Finds the Area model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

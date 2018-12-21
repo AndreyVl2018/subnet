@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Groupvlan */
 
-$this->title = 'Create Groupvlan';
-$this->params['breadcrumbs'][] = ['label' => 'Groupvlans', 'url' => ['index']];
+$this->title = 'Создание группы VLAN';
+$this->params['breadcrumbs'][] = ['label' => 'Группа VLAN', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="groupvlan-create">
@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'arrArea' => $arrArea
     ]) ?>
 
 </div>

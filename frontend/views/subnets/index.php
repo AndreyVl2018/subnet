@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\SubnetSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Subnets';
+$this->title = 'Подсети';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="subnet-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Subnet', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать подсеть', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -24,17 +24,47 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            [
+                'attribute' => 'name',
+                'label' => 'Наименование',
+                'value' => 'name',
+            ],
+            [
+                'attribute' => 'discription',
+                'label' => 'Описание',
+                'value' => 'discription',
+            ],
+            [
+                'attribute' => 'gateway',
+                'label' => 'Шлюз',
+                'value' => 'gateway',
+            ],
+            [
+                'attribute' => 'mask',
+                'label' => 'Маска',
+                'value' => 'mask',
+            ],
+            [
+                'attribute' => 'firstip',
+                'label' => 'Первый IP',
+                'value' => 'firstip',
+            ],
+            [
+                'attribute' => 'lastip',
+                'label' => 'Последний IP',
+                'value' => 'lastip',
+            ],
+            [
+                'attribute' => 'area_id',
+                'label' => 'Область',
+                'value' => 'area.name',
+                'filter' => $arrArea,
+            ],
 
-            'id',
-            'name',
-            'discription',
-            'gateway',
-            'mask',
-            //'firstip',
-            //'lastip',
-            //'area_id',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [   
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update}{delete}',
+            ],
         ],
     ]); ?>
 </div>

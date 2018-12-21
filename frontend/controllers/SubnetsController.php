@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
+use common\models\Area;
 use common\models\Subnet;
 use common\models\SubnetSearch;
 use yii\web\Controller;
@@ -38,9 +39,15 @@ class SubnetsController extends Controller
         $searchModel = new SubnetSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $model_area = Area::find()->orderBy('name')->all();
+        
+        foreach ($model_area as $value) {
+            $arrArea[$value->id] = $value->name;
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'arrArea' => $arrArea
         ]);
     }
 
@@ -66,12 +73,18 @@ class SubnetsController extends Controller
     {
         $model = new Subnet();
 
+        $model_area = Area::find()->orderBy('name')->all();
+        foreach ($model_area as $value) {
+            $arrArea[$value->id] = $value->name;
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'arrArea' => $arrArea
         ]);
     }
 
@@ -84,7 +97,13 @@ class SubnetsController extends Controller
      */
     public function actionUpdate($id)
     {
+        $arrArea = [];
         $model = $this->findModel($id);
+        
+        $model_area = Area::find()->orderBy('name')->all();
+        foreach ($model_area as $value) {
+            $arrArea[$value->id] = $value->name;
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -92,6 +111,7 @@ class SubnetsController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'arrArea' => $arrArea
         ]);
     }
 

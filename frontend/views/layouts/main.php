@@ -35,15 +35,27 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-    ];
     if (Yii::$app->user->isGuest) {
+        $menuItems = [
+            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'About', 'url' => ['/site/about']],
+            ['label' => 'Contact', 'url' => ['/site/contact']],
+        ];
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+        $menuItems = [
+//            ['label' => 'Ренамберинг', 'url' => ['/ips']],
+            ['label' => 'Подключения', 'url' => ['/orders']],
+            ['label' => 'Подсети', 'url' => ['/subnets']],
+            ['label' => '{ Ip адреса }', 'url' => ['/ips']],
+            ['label' => 'Устройства', 'url' => ['/devices']],
+            ['label' => '{ Порты }', 'url' => ['/ports']],
+            ['label' => 'Группы VLAN', 'url' => ['/groupvlans']],
+            ['label' => '{ VLANы }', 'url' => ['/vlans']],
+            ['label' => 'Области', 'url' => ['/areas']],
+            ['label' => 'Услуги', 'url' => ['/services']],
+        ];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

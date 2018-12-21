@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\DeviceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Devices';
+$this->title = 'Устройства';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="device-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Device', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать устройство', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,15 +25,35 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'alias',
-            'modeldevice',
-            'roledevice',
-            'discription',
-            //'area_id',
-            //'parent_ip_id',
-            //'parent_port_id',
-            //'parent_vlan_id',
+            [
+                'attribute' => 'alias',
+                'label' => 'Обозначение',
+                'value' => 'alias',
+            ],
+            [
+                'attribute' => 'modeldevice',
+                'label' => 'Модель',
+                'value' => 'modeldevice',
+            ],
+            [
+                'attribute' => 'roledevice',
+                'label' => 'Функционал',
+                'value' => 'roledevice',
+            ],
+            [
+                'attribute' => 'discription',
+                'label' => 'Описание',
+                'value' => 'discription',
+            ],
+            [
+                'attribute' => 'area_id',
+                'label' => 'Область',
+                'value' => 'area.name',
+                'filter' => $arrArea,
+            ],
+            'parent_ip_id',
+            'parent_port_id',
+            'parent_vlan_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

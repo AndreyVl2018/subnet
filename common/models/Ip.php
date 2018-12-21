@@ -80,4 +80,15 @@ class Ip extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Subnet::className(), ['id' => 'subnet_id']);
     }
+
+    public function beforeSave($insert) 
+    {
+        if ($this->isAttributeChanged('ipstr')) {
+            $this->iplong = sprintf('%u', ip2long($this->ipstr));
+        }
+
+        return parent::beforeSave($insert);
+    }
+
+
 }

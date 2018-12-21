@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\GroupvlanSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Groupvlans';
+$this->title = 'Группы VLAN';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="groupvlan-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Groupvlan', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать группу VLAN', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,14 +25,38 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'name',
-            'discription',
-            'firstvlan',
-            'lastvlan',
-            //'area_id',
+//            'id',
+            [
+                'attribute' => 'name',
+                'label' => 'Наименование',
+                'value' => 'name',
+            ],
+            [
+                'attribute' => 'firstvlan',
+                'label' => 'Первый VLAN',
+                'value' => 'firstvlan',
+            ],
+            [
+                'attribute' => 'lastvlan',
+                'label' => 'Последний VLAN',
+                'value' => 'lastvlan',
+            ],
+            [
+                'attribute' => 'discription',
+                'label' => 'Описание',
+                'value' => 'discription',
+            ],
+            [
+                'attribute' => 'area_id',
+                'label' => 'Область',
+                'value' => 'area.name',
+                'filter' => $arrArea,
+            ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [   
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update}{delete}',
+            ],
         ],
     ]); ?>
 </div>

@@ -62,17 +62,16 @@ class PortsController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($relation_id)
     {
         $model = new Port();
+        $model->device_id = $relation_id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->goBack();
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return $this->render('create', compact('model'));
     }
 
     /**
@@ -87,7 +86,7 @@ class PortsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->goBack();
         }
 
         return $this->render('update', [
@@ -106,7 +105,7 @@ class PortsController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+            return $this->goBack();
     }
 
     /**

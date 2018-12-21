@@ -18,6 +18,7 @@ use Yii;
  */
 class Area extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -80,4 +81,5 @@ class Area extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Subnet::className(), ['area_id' => 'id']);
     }
+ 
 }

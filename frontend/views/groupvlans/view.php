@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Groupvlan */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Groupvlans', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Группы VLAN', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -16,11 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы хотите удалить эту позицию?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -29,12 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'name',
-            'discription',
-            'firstvlan',
-            'lastvlan',
-            'area_id',
+//            'id',
+            ['label' => 'Наименование группы', 'value' => $model->name],
+            ['label' => 'Описание', 'value' => $model->discription],
+            ['label' => 'Область', 'value' => $model->area->name],
+            ['label' => 'Первый VLAN', 'value' => $model->firstvlan],
+            ['label' => 'Последний VLAN', 'value' => $model->lastvlan],
         ],
     ]) ?>
 

@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Port */
 
-$this->title = 'Update Port: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Ports', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Изменение порта: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Порты', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->number, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Изменение';
 ?>
 <div class="port-update">
 
