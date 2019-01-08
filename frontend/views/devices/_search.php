@@ -19,19 +19,21 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'alias') ?>
 
+    <?= $form->field($model, 'address') ?>
+
+    <?= $form->field($model, 'description') ?>
+
     <?= $form->field($model, 'modeldevice') ?>
 
-    <?= $form->field($model, 'roledevice') ?>
-
-    <?= $form->field($model, 'discription') ?>
+    <?php // echo $form->field($model, 'roledevice') ?>
 
     <?php // echo $form->field($model, 'area_id') ?>
 
-    <?php // echo $form->field($model, 'parent_ip_id') ?>
+    <?php // echo $form->field($model, 'mng_ip_id') ?>
 
-    <?php // echo $form->field($model, 'parent_port_id') ?>
+    <?php // echo $form->field($model, 'up_port_id') ?>
 
-    <?php // echo $form->field($model, 'parent_vlan_id') ?>
+    <?php // echo $form->field($model, 'mng_vlan_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

@@ -18,13 +18,14 @@ class m181210_092207_create_device_table extends Migration
         $this->createTable('device', [
             'id' => $this->primaryKey(),
             'alias' => $this->string(100),
+            'address' => $this->string(255),
+            'description' => $this->string(255),
             'modeldevice' => $this->string(100),
             'roledevice' => $this->string(100),
-            'discription' => $this->string(255),
             'area_id' => $this->integer(),
-            'parent_ip_id' => $this->integer(),
-            'parent_port_id' => $this->integer(),
-            'parent_vlan_id' => $this->integer(),
+            'mng_ip_id' => $this->integer(),    // было parent_ip_id
+            'up_port_id' => $this->integer(),    // было parent_port_id
+            'mng_vlan_id' => $this->integer(),    // было parent_vlan_id
         ]);
 
         // creates index for column `area_id`

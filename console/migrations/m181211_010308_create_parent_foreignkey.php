@@ -14,16 +14,16 @@ class m181211_010308_create_parent_foreignkey extends Migration
     {
         // 1. creates index for column `parent_ip_id`
         $this->createIndex(
-            'idx-device-parent_ip_id',
+            'idx-device-mng_ip_id',
             'device',
-            'parent_ip_id'
+            'mng_ip_id'
         );
 
         // add foreign key for table `device`
         $this->addForeignKey(
-            'fk-device-parent_ip_id',
+            'fk-device-mng_ip_id',
             'device',
-            'parent_ip_id',
+            'mng_ip_id',
             'ip',
             'id',
             'NO ACTION',
@@ -32,16 +32,16 @@ class m181211_010308_create_parent_foreignkey extends Migration
 
         // 2. creates index for column `parent_port_id`
         $this->createIndex(
-            'idx-device-parent_port_id',
+            'idx-device-up_port_id',
             'device',
-            'parent_port_id'
+            'up_port_id'
         );
 
         // add foreign key for table `device`
         $this->addForeignKey(
-            'fk-device-parent_port_id',
+            'fk-device-up_port_id',
             'device',
-            'parent_port_id',
+            'up_port_id',
             'port',
             'id',
             'NO ACTION',
@@ -49,16 +49,16 @@ class m181211_010308_create_parent_foreignkey extends Migration
         );
         // 3. creates index for column `parent_vlan_id`
         $this->createIndex(
-            'idx-device-parent_vlan_id',
+            'idx-device-mng_vlan_id',
             'device',
-            'parent_vlan_id'
+            'mng_vlan_id'
         );
 
         // add foreign key for table `device`
         $this->addForeignKey(
-            'fk-device-parent_vlan_id',
+            'fk-device-mng_vlan_id',
             'device',
-            'parent_vlan_id',
+            'mng_vlan_id',
             'vlan',
             'id',
             'NO ACTION',
@@ -73,32 +73,32 @@ class m181211_010308_create_parent_foreignkey extends Migration
     {
         // 1. drops foreign key for table `device`
         $this->dropForeignKey(
-            'fk-device-parent_vlan_id',
+            'fk-device-mng_vlan_id',
             'device'
         );
         // drops index for column `parent_vlan_id`
         $this->dropIndex(
-            'idx-device-parent_vlan_id',
+            'idx-device-mng_vlan_id',
             'device'
         );
         // 2. drops foreign key for table `device`
         $this->dropForeignKey(
-            'fk-device-parent_port_id',
+            'fk-device-up_port_id',
             'device'
         );
         // drops index for column `parent_port_id`
         $this->dropIndex(
-            'idx-device-parent_port_id',
+            'idx-device-up_port_id',
             'device'
         );
         // 3. drops foreign key for table `device`
         $this->dropForeignKey(
-            'fk-device-parent_ip_id',
+            'fk-device-mng_ip_id',
             'device'
         );
         // drops index for column `parent_ip_id`
         $this->dropIndex(
-            'idx-device-parent_ip_id',
+            'idx-device-mng_ip_id',
             'device'
         );
     }

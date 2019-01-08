@@ -27,10 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'iplong',
-            'ipstr',
             'subnet_id',
             'order_id',
-            //'status',
+            'status',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

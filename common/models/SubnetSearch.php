@@ -17,8 +17,9 @@ class SubnetSearch extends Subnet
     public function rules()
     {
         return [
-            [['id', 'area_id'], 'integer'],
-            [['name', 'discription', 'gateway', 'mask', 'firstip', 'lastip'], 'safe'],
+            [['id', 'mask', 'area_id'], 'integer'],
+            [['ip', 'gateway'], 'number'],
+            [['name', 'description'], 'safe'],
         ];
     }
 
@@ -59,15 +60,14 @@ class SubnetSearch extends Subnet
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'ip' => $this->ip,
+            'mask' => $this->mask,
+            'gateway' => $this->gateway,
             'area_id' => $this->area_id,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'discription', $this->discription])
-            ->andFilterWhere(['like', 'gateway', $this->gateway])
-            ->andFilterWhere(['like', 'mask', $this->mask])
-            ->andFilterWhere(['like', 'firstip', $this->firstip])
-            ->andFilterWhere(['like', 'lastip', $this->lastip]);
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

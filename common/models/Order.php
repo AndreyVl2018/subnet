@@ -10,19 +10,17 @@ use Yii;
  * @property int $id
  * @property string $number
  * @property string $abonent
- * @property string $adress
+ * @property string $address
+ * @property string $description
  * @property int $service_id
- * @property int $area_id
  *
  * @property Ip[] $ips
- * @property Area $area
  * @property Service $service
  * @property Port[] $ports
  * @property Vlan[] $vlans
  */
 class Order extends \yii\db\ActiveRecord
 {
-    public $groupvlan;
     /**
      * {@inheritdoc}
      */
@@ -37,10 +35,9 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['service_id', 'area_id'], 'integer'],
-            [['number', 'groupvlan'], 'string', 'max' => 100],
-            [['abonent', 'adress'], 'string', 'max' => 255],
-            [['area_id'], 'exist', 'skipOnError' => true, 'targetClass' => Area::className(), 'targetAttribute' => ['area_id' => 'id']],
+            [['service_id'], 'integer'],
+            [['number'], 'string', 'max' => 100],
+            [['abonent', 'address', 'description'], 'string', 'max' => 255],
             [['service_id'], 'exist', 'skipOnError' => true, 'targetClass' => Service::className(), 'targetAttribute' => ['service_id' => 'id']],
         ];
     }
@@ -54,9 +51,11 @@ class Order extends \yii\db\ActiveRecord
             'id' => 'ID',
             'number' => 'Number',
             'abonent' => 'Abonent',
-            'adress' => 'Adress',
+            'address' => 'Address',
+            'description' => 'Description',
             'service_id' => 'Service ID',
-            'area_id' => 'Area ID',
+            'ipName' => 'Ip',
+            'subnetName' => 'Subnet',
         ];
     }
 
@@ -68,15 +67,7 @@ class Order extends \yii\db\ActiveRecord
         return $this->hasMany(Ip::className(), ['order_id' => 'id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getArea()
-    {
-        return $this->hasOne(Area::className(), ['id' => 'area_id']);
-    }
-
-    /**
+     /**
      * @return \yii\db\ActiveQuery
      */
     public function getService()
@@ -99,14 +90,5 @@ class Order extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Vlan::className(), ['order_id' => 'id']);
     }
- /*
-    public function getGroupvlan()
-    {
-        foreach ($this->area->groupvlans as $value) {
-            $arrGroupvlan[$value->id] = $value->name;
-        }
-        echo "Я здесь !!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
-        return $arrGroupvlan;
-    }
-    */
+
 }

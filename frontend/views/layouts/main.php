@@ -19,6 +19,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -49,12 +50,13 @@ AppAsset::register($this);
             ['label' => 'Подключения', 'url' => ['/orders']],
             ['label' => 'Подсети', 'url' => ['/subnets']],
             ['label' => '{ Ip адреса }', 'url' => ['/ips']],
-            ['label' => 'Устройства', 'url' => ['/devices']],
+            ['label' => 'Устройства', 'url' => ['/devices-list2']],
             ['label' => '{ Порты }', 'url' => ['/ports']],
             ['label' => 'Группы VLAN', 'url' => ['/groupvlans']],
             ['label' => '{ VLANы }', 'url' => ['/vlans']],
             ['label' => 'Области', 'url' => ['/areas']],
             ['label' => 'Услуги', 'url' => ['/services']],
+            ['label' => 'Утилиты', 'url' => ['/utilities']],
         ];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

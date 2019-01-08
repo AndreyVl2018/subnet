@@ -43,6 +43,20 @@ AppAsset::register($this);
             ['label' => 'Login', 'url' => ['/site/login']]
         ];
     } else {
+        $menuItems = [
+/*            ['label' => 'Ренамберинг', 'url' => ['/ips']],
+            ['label' => 'Подключения', 'url' => ['/orders']],
+            ['label' => 'Подсети', 'url' => ['/subnets']],
+            ['label' => '{ Ip адреса }', 'url' => ['/ips']],
+            ['label' => 'Устройства', 'url' => ['/devices']],
+            ['label' => '{ Порты }', 'url' => ['/ports']],
+            ['label' => 'Группы VLAN', 'url' => ['/groupvlans']],
+            ['label' => '{ VLANы }', 'url' => ['/vlans']],
+            ['label' => 'Области', 'url' => ['/areas']],
+            ['label' => 'Услуги', 'url' => ['/services']],
+*/            ['label' => 'Утилиты', 'url' => ['/utilities']],
+        ];
+  
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

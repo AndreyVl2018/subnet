@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Port */
@@ -10,9 +10,9 @@ use yii\bootstrap\ActiveForm;
 
 <div class="port-form">
 
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal']); ?>
+    <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'number')->textInput(['maxlength' => true])->label('Номер') ?>
+    <?= $form->field($model, 'number')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'device_id')->textInput() ?>
 
@@ -21,7 +21,7 @@ use yii\bootstrap\ActiveForm;
     <?= $form->field($model, 'status')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

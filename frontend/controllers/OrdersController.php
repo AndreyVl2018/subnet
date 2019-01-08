@@ -4,15 +4,12 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\Order;
-use common\models\Area;
-use common\models\Device;
-use common\models\Service;
-use common\models\Port;
-use common\models\Groupvlan;
-use common\models\Subnet;
-use common\models\Vlan;
-use common\models\Ip;
 use common\models\OrderSearch;
+use common\models\Ip;
+use common\models\Subnet;
+use common\models\Device;
+use common\models\Port;
+use common\models\Vlan;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -46,23 +43,9 @@ class OrdersController extends Controller
         $searchModel = new OrderSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $model_area = Area::find()->orderBy('name')->all();
-        
-        foreach ($model_area as $value) {
-            $arrArea[$value->id] = $value->name;
-        }
-
-        $model_service = Service::find()->orderBy('name')->all();
-        
-        foreach ($model_service as $value) {
-            $arrService[$value->id] = $value->name;
-        }
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'arrArea' => $arrArea,
-            'arrService' => $arrService,
         ]);
     }
 
@@ -87,17 +70,6 @@ class OrdersController extends Controller
     public function actionCreate()
     {
         $model = new Order();
-        $model_area = Area::find()->orderBy('name')->all();
-        
-        foreach ($model_area as $value) {
-            $arrArea[$value->id] = $value->name;
-        }
-
-        $model_service = Service::find()->orderBy('name')->all();
-        
-        foreach ($model_service as $value) {
-            $arrService[$value->id] = $value->name;
-        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -105,8 +77,6 @@ class OrdersController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'arrArea' => $arrArea,
-            'arrService' => $arrService
         ]);
     }
 
@@ -120,21 +90,6 @@ class OrdersController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model_area = Area::find()->orderBy('name')->all();
-        
-        foreach ($model_area as $value) {
-            $arrArea[$value->id] = $value->name;
-        }
-
-        $model_service = Service::find()->orderBy('name')->all();
-        
-        foreach ($model_service as $value) {
-            $arrService[$value->id] = $value->name;
-        }
-        
-        foreach ($model->area->groupvlans as $value) {
-            $arrGroupvlan[$value->id] = $value->name;
-        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -142,9 +97,6 @@ class OrdersController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'arrArea' => $arrArea,
-            'arrService' => $arrService,
-            'arrGroupvlan' => $arrGroupvlan
         ]);
     }
 

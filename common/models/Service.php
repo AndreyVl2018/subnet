@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $name
- * @property string $discription
+ * @property string $description
  *
  * @property Order[] $orders
  */
@@ -30,7 +30,7 @@ class Service extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'string', 'max' => 100],
-            [['discription'], 'string', 'max' => 255],
+            [['description'], 'string', 'max' => 255],
         ];
     }
 
@@ -42,7 +42,7 @@ class Service extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'discription' => 'Discription',
+            'description' => 'Description',
         ];
     }
 

@@ -8,8 +8,8 @@ use Yii;
  * This is the model class for table "vlan".
  *
  * @property int $id
- * @property string $number
- * @property string $discription
+ * @property int $number
+ * @property string $description
  * @property int $groupvlan_id
  * @property int $order_id
  * @property int $status
@@ -34,9 +34,8 @@ class Vlan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['groupvlan_id', 'order_id', 'status'], 'integer'],
-            [['number'], 'string', 'max' => 100],
-            [['discription'], 'string', 'max' => 255],
+            [['number', 'groupvlan_id', 'order_id', 'status'], 'integer'],
+            [['description'], 'string', 'max' => 255],
             [['groupvlan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Groupvlan::className(), 'targetAttribute' => ['groupvlan_id' => 'id']],
             [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Order::className(), 'targetAttribute' => ['order_id' => 'id']],
         ];
@@ -50,7 +49,7 @@ class Vlan extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'number' => 'Number',
-            'discription' => 'Discription',
+            'description' => 'Description',
             'groupvlan_id' => 'Groupvlan ID',
             'order_id' => 'Order ID',
             'status' => 'Status',
@@ -62,7 +61,7 @@ class Vlan extends \yii\db\ActiveRecord
      */
     public function getDevices()
     {
-        return $this->hasMany(Device::className(), ['parent_vlan_id' => 'id']);
+        return $this->hasMany(Device::className(), ['mng_vlan_id' => 'id']);
     }
 
     /**

@@ -19,7 +19,7 @@ class m181210_093019_create_ip_table extends Migration
         $this->createTable('ip', [
             'id' => $this->primaryKey(),
             'iplong' => $this->double(),
-            'ipstr' => $this->string(15),
+            // 'ipstr' => $this->string(15),
             'subnet_id' => $this->integer(),
             'order_id' => $this->integer(),
             'status' => $this->integer(),

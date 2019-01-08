@@ -8,12 +8,11 @@ use Yii;
  * This is the model class for table "subnet".
  *
  * @property int $id
+ * @property double $ip
+ * @property int $mask
+ * @property double $gateway
  * @property string $name
- * @property string $discription
- * @property string $gateway
- * @property string $mask
- * @property string $firstip
- * @property string $lastip
+ * @property string $description
  * @property int $area_id
  *
  * @property Ip[] $ips
@@ -35,10 +34,10 @@ class Subnet extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['area_id'], 'integer'],
+            [['ip', 'gateway'], 'number'],
+            [['mask', 'area_id'], 'integer'],
             [['name'], 'string', 'max' => 100],
-            [['discription'], 'string', 'max' => 255],
-            [['gateway', 'mask', 'firstip', 'lastip'], 'string', 'max' => 15],
+            [['description'], 'string', 'max' => 255],
             [['area_id'], 'exist', 'skipOnError' => true, 'targetClass' => Area::className(), 'targetAttribute' => ['area_id' => 'id']],
         ];
     }
@@ -50,12 +49,11 @@ class Subnet extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'discription' => 'Discription',
-            'gateway' => 'Gateway',
+            'ip' => 'Ip',
             'mask' => 'Mask',
-            'firstip' => 'Firstip',
-            'lastip' => 'Lastip',
+            'gateway' => 'Gateway',
+            'name' => 'Name',
+            'description' => 'Description',
             'area_id' => 'Area ID',
         ];
     }

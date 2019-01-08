@@ -14,8 +14,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'iplong')->textInput() ?>
 
-    <?= $form->field($model, 'ipstr')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'subnet_id')->textInput() ?>
 
     <?= $form->field($model, 'order_id')->textInput() ?>

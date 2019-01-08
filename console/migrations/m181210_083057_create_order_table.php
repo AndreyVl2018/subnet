@@ -20,9 +20,9 @@ class m181210_083057_create_order_table extends Migration
             'id' => $this->primaryKey(),
             'number' => $this->string(100),
             'abonent' => $this->string(255),
-            'adress' => $this->string(255),
+            'address' => $this->string(255),
+            'description' => $this->string(255),
             'service_id' => $this->integer(),
-            'area_id' => $this->integer(),
         ]);
 
         // creates index for column `service_id`
@@ -41,7 +41,7 @@ class m181210_083057_create_order_table extends Migration
             'id',
             'CASCADE'
         );
-
+/*
         // creates index for column `area_id`
         $this->createIndex(
             'idx-order-area_id',
@@ -58,6 +58,7 @@ class m181210_083057_create_order_table extends Migration
             'id',
             'CASCADE'
         );
+*/
     }
 
     /**
@@ -76,7 +77,7 @@ class m181210_083057_create_order_table extends Migration
             'idx-order-service_id',
             'order'
         );
-
+/*
         // drops foreign key for table `area`
         $this->dropForeignKey(
             'fk-order-area_id',
@@ -88,7 +89,7 @@ class m181210_083057_create_order_table extends Migration
             'idx-order-area_id',
             'order'
         );
-
+*/
         $this->dropTable('order');
     }
 }

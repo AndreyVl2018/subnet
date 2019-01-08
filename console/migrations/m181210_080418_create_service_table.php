@@ -15,7 +15,7 @@ class m181210_080418_create_service_table extends Migration
         $this->createTable('service', [
             'id' => $this->primaryKey(),
             'name' => $this->string(100),
-            'discription' => $this->string(255),
+            'description' => $this->string(255),
         ]);
     }
 

@@ -4,7 +4,6 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\Device;
-use common\models\Area;
 use common\models\DeviceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -38,17 +37,10 @@ class DevicesController extends Controller
     {
         $searchModel = new DeviceSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        
-        $model_area = Area::find()->orderBy('name')->all();
-        
-        foreach ($model_area as $value) {
-            $arrArea[$value->id] = $value->name;
-        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'arrArea' => $arrArea
         ]);
     }
 
@@ -74,19 +66,12 @@ class DevicesController extends Controller
     {
         $model = new Device();
 
-        $model_area = Area::find()->orderBy('name')->all();
-        
-        foreach ($model_area as $value) {
-            $arrArea[$value->id] = $value->name;
-        }
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'arrArea' => $arrArea
         ]);
     }
 
@@ -101,20 +86,12 @@ class DevicesController extends Controller
     {
         $model = $this->findModel($id);
 
-        $model_area = Area::find()->orderBy('name')->all();
-        $this->storeReturnUrl();
-        
-        foreach ($model_area as $value) {
-            $arrArea[$value->id] = $value->name;
-        }
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
-            'arrArea' => $arrArea
         ]);
     }
 
@@ -147,10 +124,4 @@ class DevicesController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-    private function storeReturnUrl()
-    {
-        Yii::$app->user->returnUrl = Yii::$app->request->url;
-    }
-
 }

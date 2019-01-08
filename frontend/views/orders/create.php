@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Order */
 
-$this->title = 'Создание подключения';
-$this->params['breadcrumbs'][] = ['label' => 'Подключения', 'url' => ['index']];
+$this->title = 'Create Order';
+$this->params['breadcrumbs'][] = ['label' => 'Orders', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-create">
@@ -15,8 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
-        'arrArea' => $arrArea,
-        'arrService' => $arrService
     ]) ?>
 
 </div>

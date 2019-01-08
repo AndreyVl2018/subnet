@@ -9,7 +9,6 @@ use Yii;
  *
  * @property int $id
  * @property double $iplong
- * @property string $ipstr
  * @property int $subnet_id
  * @property int $order_id
  * @property int $status
@@ -36,7 +35,6 @@ class Ip extends \yii\db\ActiveRecord
         return [
             [['iplong'], 'number'],
             [['subnet_id', 'order_id', 'status'], 'integer'],
-            [['ipstr'], 'string', 'max' => 15],
             [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Order::className(), 'targetAttribute' => ['order_id' => 'id']],
             [['subnet_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subnet::className(), 'targetAttribute' => ['subnet_id' => 'id']],
         ];
@@ -50,7 +48,6 @@ class Ip extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'iplong' => 'Iplong',
-            'ipstr' => 'Ipstr',
             'subnet_id' => 'Subnet ID',
             'order_id' => 'Order ID',
             'status' => 'Status',
@@ -62,7 +59,7 @@ class Ip extends \yii\db\ActiveRecord
      */
     public function getDevices()
     {
-        return $this->hasMany(Device::className(), ['parent_ip_id' => 'id']);
+        return $this->hasMany(Device::className(), ['mng_ip_id' => 'id']);
     }
 
     /**
@@ -81,13 +78,14 @@ class Ip extends \yii\db\ActiveRecord
         return $this->hasOne(Subnet::className(), ['id' => 'subnet_id']);
     }
 
-    public function beforeSave($insert) 
+    public function getStrIp()
     {
-        if ($this->isAttributeChanged('ipstr')) {
-            $this->iplong = sprintf('%u', ip2long($this->ipstr));
-        }
+        return long2ip($this->iplong);
+    }
 
-        return parent::beforeSave($insert);
+    public function setStrIp($value)
+    {
+        $this->iplong = sprintf('%u', ip2long($value));
     }
 
 

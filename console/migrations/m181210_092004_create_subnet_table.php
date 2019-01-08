@@ -17,12 +17,11 @@ class m181210_092004_create_subnet_table extends Migration
     {
         $this->createTable('subnet', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(100),
-            'discription' => $this->string(255),
-            'gateway' => $this->string(15),
-            'mask' => $this->string(15),
-            'firstip' => $this->string(15),
-            'lastip' => $this->string(15),
+            'ip' => $this->double(),
+            'mask' => $this->integer(),         // выбор из массива префикс/маска
+            'gateway' => $this->double(),
+            'name' => $this->string(100),       // поле для перехода со старой базы
+            'description' => $this->string(255),
             'area_id' => $this->integer(),
         ]);
 

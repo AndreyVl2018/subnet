@@ -19,13 +19,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'iplong') ?>
 
-    <?= $form->field($model, 'ipstr') ?>
-
     <?= $form->field($model, 'subnet_id') ?>
 
     <?= $form->field($model, 'order_id') ?>
 
-    <?php // echo $form->field($model, 'status') ?>
+    <?= $form->field($model, 'status') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

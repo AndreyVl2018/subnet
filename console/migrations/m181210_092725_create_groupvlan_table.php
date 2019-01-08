@@ -18,7 +18,7 @@ class m181210_092725_create_groupvlan_table extends Migration
         $this->createTable('groupvlan', [
             'id' => $this->primaryKey(),
             'name' => $this->string(100),
-            'discription' => $this->string(255),
+            'description' => $this->string(255),
             'firstvlan' => $this->string(15),
             'lastvlan' => $this->string(15),
             'area_id' => $this->integer(),

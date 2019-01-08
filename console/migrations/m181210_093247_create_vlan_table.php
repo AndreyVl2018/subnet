@@ -18,8 +18,8 @@ class m181210_093247_create_vlan_table extends Migration
     {
         $this->createTable('vlan', [
             'id' => $this->primaryKey(),
-            'number' => $this->string(100),
-            'discription' => $this->string(255),
+            'number' => $this->integer(),
+            'description' => $this->string(255),
             'groupvlan_id' => $this->integer(),
             'order_id' => $this->integer(),
             'status' => $this->integer(),

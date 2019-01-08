@@ -34,7 +34,7 @@ class Port extends \yii\db\ActiveRecord
     {
         return [
             [['device_id', 'order_id', 'status'], 'integer'],
-            [['number'], 'string', 'max' => 100],
+            [['number'], 'string', 'max' => 10],
             [['device_id'], 'exist', 'skipOnError' => true, 'targetClass' => Device::className(), 'targetAttribute' => ['device_id' => 'id']],
             [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Order::className(), 'targetAttribute' => ['order_id' => 'id']],
         ];
@@ -59,7 +59,7 @@ class Port extends \yii\db\ActiveRecord
      */
     public function getDevices()
     {
-        return $this->hasMany(Device::className(), ['parent_port_id' => 'id']);
+        return $this->hasMany(Device::className(), ['up_port_id' => 'id']);
     }
 
     /**

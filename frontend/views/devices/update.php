@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Device */
 
-$this->title = 'Изменение устройства: ' . $model->alias;
-$this->params['breadcrumbs'][] = ['label' => 'Устройства', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->alias, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Изменение';
+$this->title = 'Update Device: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Devices', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="device-update">
 
@@ -16,7 +16,6 @@ $this->params['breadcrumbs'][] = 'Изменение';
 
     <?= $this->render('_form', [
         'model' => $model,
-        'arrArea' => $arrArea
     ]) ?>
 
 </div>

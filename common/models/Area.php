@@ -9,16 +9,14 @@ use Yii;
  *
  * @property int $id
  * @property string $name
- * @property string $discription
+ * @property string $description
  *
  * @property Device[] $devices
  * @property Groupvlan[] $groupvlans
- * @property Order[] $orders
  * @property Subnet[] $subnets
  */
 class Area extends \yii\db\ActiveRecord
 {
-
     /**
      * {@inheritdoc}
      */
@@ -34,7 +32,7 @@ class Area extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'string', 'max' => 100],
-            [['discription'], 'string', 'max' => 255],
+            [['description'], 'string', 'max' => 255],
         ];
     }
 
@@ -46,7 +44,7 @@ class Area extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'discription' => 'Discription',
+            'description' => 'Description',
         ];
     }
 
@@ -69,17 +67,8 @@ class Area extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getOrders()
-    {
-        return $this->hasMany(Order::className(), ['area_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getSubnets()
     {
         return $this->hasMany(Subnet::className(), ['area_id' => 'id']);
     }
- 
 }

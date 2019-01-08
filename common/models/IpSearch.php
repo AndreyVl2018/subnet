@@ -19,7 +19,6 @@ class IpSearch extends Ip
         return [
             [['id', 'subnet_id', 'order_id', 'status'], 'integer'],
             [['iplong'], 'number'],
-            [['ipstr'], 'safe'],
         ];
     }
 
@@ -65,8 +64,6 @@ class IpSearch extends Ip
             'order_id' => $this->order_id,
             'status' => $this->status,
         ]);
-
-        $query->andFilterWhere(['like', 'ipstr', $this->ipstr]);
 
         return $dataProvider;
     }

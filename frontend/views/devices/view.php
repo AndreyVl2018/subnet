@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\Device */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Устройства', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Devices', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -16,11 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Вы хотите удалить эту позицию?',
+                'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -31,13 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'alias',
+            'address',
+            'description',
             'modeldevice',
             'roledevice',
-            'discription',
             'area_id',
-            'parent_ip_id',
-            'parent_port_id',
-            'parent_vlan_id',
+            'mng_ip_id',
+            'up_port_id',
+            'mng_vlan_id',
         ],
     ]) ?>
 

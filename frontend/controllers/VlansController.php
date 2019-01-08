@@ -62,16 +62,17 @@ class VlansController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($relation_id)
+    public function actionCreate()
     {
         $model = new Vlan();
-        $model->groupvlan_id = $relation_id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->goBack();
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', compact('model'));
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -86,10 +87,12 @@ class VlansController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->goBack();
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', compact('model'));
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -103,7 +106,7 @@ class VlansController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->goBack();
+        return $this->redirect(['index']);
     }
 
     /**

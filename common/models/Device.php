@@ -9,18 +9,19 @@ use Yii;
  *
  * @property int $id
  * @property string $alias
+ * @property string $address
+ * @property string $description
  * @property string $modeldevice
  * @property string $roledevice
- * @property string $discription
  * @property int $area_id
- * @property int $parent_ip_id
- * @property int $parent_port_id
- * @property int $parent_vlan_id
+ * @property int $mng_ip_id
+ * @property int $up_port_id
+ * @property int $mng_vlan_id
  *
  * @property Area $area
- * @property Ip $parentIp
- * @property Port $parentPort
- * @property Vlan $parentVlan
+ * @property Ip $mngIp
+ * @property Vlan $mngVlan
+ * @property Port $upPort
  * @property Port[] $ports
  */
 class Device extends \yii\db\ActiveRecord
@@ -39,13 +40,13 @@ class Device extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['area_id', 'parent_ip_id', 'parent_port_id', 'parent_vlan_id'], 'integer'],
+            [['area_id', 'mng_ip_id', 'up_port_id', 'mng_vlan_id'], 'integer'],
             [['alias', 'modeldevice', 'roledevice'], 'string', 'max' => 100],
-            [['discription'], 'string', 'max' => 255],
+            [['address', 'description'], 'string', 'max' => 255],
             [['area_id'], 'exist', 'skipOnError' => true, 'targetClass' => Area::className(), 'targetAttribute' => ['area_id' => 'id']],
-            [['parent_ip_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ip::className(), 'targetAttribute' => ['parent_ip_id' => 'id']],
-            [['parent_port_id'], 'exist', 'skipOnError' => true, 'targetClass' => Port::className(), 'targetAttribute' => ['parent_port_id' => 'id']],
-            [['parent_vlan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Vlan::className(), 'targetAttribute' => ['parent_vlan_id' => 'id']],
+            [['mng_ip_id'], 'exist', 'skipOnError' => true, 'targetClass' => Ip::className(), 'targetAttribute' => ['mng_ip_id' => 'id']],
+            [['mng_vlan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Vlan::className(), 'targetAttribute' => ['mng_vlan_id' => 'id']],
+            [['up_port_id'], 'exist', 'skipOnError' => true, 'targetClass' => Port::className(), 'targetAttribute' => ['up_port_id' => 'id']],
         ];
     }
 
@@ -57,13 +58,14 @@ class Device extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'alias' => 'Alias',
+            'address' => 'Address',
+            'description' => 'Description',
             'modeldevice' => 'Modeldevice',
             'roledevice' => 'Roledevice',
-            'discription' => 'Discription',
             'area_id' => 'Area ID',
-            'parent_ip_id' => 'Parent Ip ID',
-            'parent_port_id' => 'Parent Port ID',
-            'parent_vlan_id' => 'Parent Vlan ID',
+            'mng_ip_id' => 'Mng Ip ID',
+            'up_port_id' => 'Up Port ID',
+            'mng_vlan_id' => 'Mng Vlan ID',
         ];
     }
 
@@ -78,25 +80,25 @@ class Device extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getParentIp()
+    public function getMngIp()
     {
-        return $this->hasOne(Ip::className(), ['id' => 'parent_ip_id']);
+        return $this->hasOne(Ip::className(), ['id' => 'mng_ip_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getParentPort()
+    public function getMngVlan()
     {
-        return $this->hasOne(Port::className(), ['id' => 'parent_port_id']);
+        return $this->hasOne(Vlan::className(), ['id' => 'mng_vlan_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getParentVlan()
+    public function getUpPort()
     {
-        return $this->hasOne(Vlan::className(), ['id' => 'parent_vlan_id']);
+        return $this->hasOne(Port::className(), ['id' => 'up_port_id']);
     }
 
     /**

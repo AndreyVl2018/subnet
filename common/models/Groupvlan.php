@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $name
- * @property string $discription
+ * @property string $description
  * @property string $firstvlan
  * @property string $lastvlan
  * @property int $area_id
@@ -35,7 +35,7 @@ class Groupvlan extends \yii\db\ActiveRecord
         return [
             [['area_id'], 'integer'],
             [['name'], 'string', 'max' => 100],
-            [['discription'], 'string', 'max' => 255],
+            [['description'], 'string', 'max' => 255],
             [['firstvlan', 'lastvlan'], 'string', 'max' => 15],
             [['area_id'], 'exist', 'skipOnError' => true, 'targetClass' => Area::className(), 'targetAttribute' => ['area_id' => 'id']],
         ];
@@ -49,7 +49,7 @@ class Groupvlan extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'discription' => 'Discription',
+            'description' => 'Description',
             'firstvlan' => 'Firstvlan',
             'lastvlan' => 'Lastvlan',
             'area_id' => 'Area ID',

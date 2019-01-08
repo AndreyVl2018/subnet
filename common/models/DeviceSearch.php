@@ -17,8 +17,8 @@ class DeviceSearch extends Device
     public function rules()
     {
         return [
-            [['id', 'area_id', 'parent_ip_id', 'parent_port_id', 'parent_vlan_id'], 'integer'],
-            [['alias', 'modeldevice', 'roledevice', 'discription'], 'safe'],
+            [['id', 'area_id', 'mng_ip_id', 'up_port_id', 'mng_vlan_id'], 'integer'],
+            [['alias', 'address', 'description', 'modeldevice', 'roledevice'], 'safe'],
         ];
     }
 
@@ -60,15 +60,16 @@ class DeviceSearch extends Device
         $query->andFilterWhere([
             'id' => $this->id,
             'area_id' => $this->area_id,
-            'parent_ip_id' => $this->parent_ip_id,
-            'parent_port_id' => $this->parent_port_id,
-            'parent_vlan_id' => $this->parent_vlan_id,
+            'mng_ip_id' => $this->mng_ip_id,
+            'up_port_id' => $this->up_port_id,
+            'mng_vlan_id' => $this->mng_vlan_id,
         ]);
 
         $query->andFilterWhere(['like', 'alias', $this->alias])
+            ->andFilterWhere(['like', 'address', $this->address])
+            ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'modeldevice', $this->modeldevice])
-            ->andFilterWhere(['like', 'roledevice', $this->roledevice])
-            ->andFilterWhere(['like', 'discription', $this->discription]);
+            ->andFilterWhere(['like', 'roledevice', $this->roledevice]);
 
         return $dataProvider;
     }

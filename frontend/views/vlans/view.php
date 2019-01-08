@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'number',
-            'discription',
+            'description',
             'groupvlan_id',
             'order_id',
             'status',

@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Device */
@@ -10,55 +10,28 @@ use yii\bootstrap\ActiveForm;
 
 <div class="device-form">
 
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal']); ?>
+    <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'alias')->textInput(['maxlength' => true])->label('Обозначение') ?>
+    <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'modeldevice')->textInput(['maxlength' => true])->label('Модель') ?>
+    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'roledevice')->textInput(['maxlength' => true])->label('Функционал') ?>
+    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'discription')->textInput(['maxlength' => true])->label('Описание') ?>
+    <?= $form->field($model, 'modeldevice')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'area_id')->dropDownList($arrArea)->label('Область') ?>
+    <?= $form->field($model, 'roledevice')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'parent_ip_id')->textInput() ?>
+    <?= $form->field($model, 'area_id')->textInput() ?>
 
-    <?= $form->field($model, 'parent_port_id')->textInput() ?>
+    <?= $form->field($model, 'mng_ip_id')->textInput() ?>
 
-    <?= $form->field($model, 'parent_vlan_id')->textInput() ?>
+    <?= $form->field($model, 'up_port_id')->textInput() ?>
 
-    <?php if (!$model->isNewRecord):?>
-
-    <h2>Порты</h2>
-    <?= \yii\grid\GridView::widget([
-        'dataProvider' => new \yii\data\ActiveDataProvider([
-                'query' => $model->getPorts(),
-                'pagination' => false
-            ]),
-        'columns' => [
-            [
-                'label' => 'Номер',
-                'value' => 'number'
-            ],
-            [
-                'label' => 'Статус',
-                'value' => 'status'
-            ],
-            [
-                'class' => \yii\grid\ActionColumn::className(),
-                'controller' => 'ports',
-                'header' => Html::a('<i class="glyphicon glyphicon-plus"></i>&nbsp;Добавить', ['..\ports\create', 'relation_id' => $model->id]),
-                'template' => '{update}{delete}',
-            ]
-        ]
-    ]);?>
-
-    <?php endif?>
-
+    <?= $form->field($model, 'mng_vlan_id')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

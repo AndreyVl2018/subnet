@@ -15,7 +15,7 @@ class m181210_080708_create_area_table extends Migration
         $this->createTable('area', [
             'id' => $this->primaryKey(),
             'name' => $this->string(100),
-            'discription' => $this->string(255),
+            'description' => $this->string(255),
         ]);
     }
 

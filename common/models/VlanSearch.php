@@ -17,8 +17,8 @@ class VlanSearch extends Vlan
     public function rules()
     {
         return [
-            [['id', 'groupvlan_id', 'order_id', 'status'], 'integer'],
-            [['number', 'discription'], 'safe'],
+            [['id', 'number', 'groupvlan_id', 'order_id', 'status'], 'integer'],
+            [['description'], 'safe'],
         ];
     }
 
@@ -59,13 +59,13 @@ class VlanSearch extends Vlan
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'number' => $this->number,
             'groupvlan_id' => $this->groupvlan_id,
             'order_id' => $this->order_id,
             'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'number', $this->number])
-            ->andFilterWhere(['like', 'discription', $this->discription]);
+        $query->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

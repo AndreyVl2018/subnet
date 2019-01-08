@@ -31,7 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'iplong',
-            'ipstr',
             'subnet_id',
             'order_id',
             'status',

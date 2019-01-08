@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'number') ?>
 
-    <?= $form->field($model, 'discription') ?>
+    <?= $form->field($model, 'description') ?>
 
     <?= $form->field($model, 'groupvlan_id') ?>
 

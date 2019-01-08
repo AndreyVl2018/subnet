@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\OrderSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Подключения';
+$this->title = 'Orders';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="order-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Создать Подключение', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Order', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,70 +25,74 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-/*            [
-                'attribute' => 'number',
-                'label' => 'Номер',
-                'value' => 'number',
-            ],
-*/            [
-                'attribute' => 'abonent',
-                'label' => 'Ф И О',
-                'value' => 'abonent',
-            ],
+            // 'id',
+            // 'number',
+            //'service_id',
             [
-                'attribute' => 'adress',
-                'label' => 'Адрес',
-                'value' => 'adress',
-            ],
-/*            [
-                'attribute' => 'ip.ipstr',
-                'label' => 'IP адрес',
-                'value' => 'ip.ipstr',
-//                'filter' => $arrArea,
-            ],
-            [
-                'attribute' => 'vlan.number',
-                'label' => 'VLAN',
-                'value' => 'vlan.number',
-//                'filter' => $arrArea,
-            ],
-            [
-                'attribute' => 'device.alias',
-                'label' => 'Устройство',
-                'value' => 'device.alias',
-//                'filter' => $arrArea,
-            ],
-            [
-                'attribute' => 'port.number',
-                'label' => 'Порт',
-                'value' => 'port.number',
-//                'filter' => $arrArea,
-            ],
-  */          [
-                'attribute' => 'service_id',
-                'label' => 'Услуга',
-                'value' => 'service_id',
-                'filter' => $arrService,
-            ],
-            [
-                'attribute' => 'area_id',
-                'label' => 'Область',
-                'value' => 'area.name',
-                'filter' => $arrArea,
-            ],
-            [
-//                'attribute' => 'area.groupvlans.name',
-                'label' => 'ГруппЫ VLAN',
+                'attribute' => 'ipName',
+                'label' => 'Ip',
                 'format' => 'paragraphs',
                 'value' => function ($model) {
-                    $result = '';
-                    foreach ($model->area->groupvlans as $groupvlan) {
-                        # code...
-                        $result .= $groupvlan->name . "\n\n";
+                        $result = '';
+                        foreach ($model->ips as $ip) {
+                            $result .= $ip->strip . "\n\n";
+                        }
+                        return $result;
                     }
-                    return $result;
-                }
-//                'filter' => $arrArea,
+            ],
+            'abonent',
+            'address',
+            // 'description',
+            [
+                // 'attribute' => 'subnetName',
+                'label' => 'Subnet',
+                // 'format' => 'paragraphs',
+                'value' => function ($model) {
+                        $result = '';
+                        foreach ($model->ips as $ip) {
+                            $result .= $ip->subnet->name . "\n\n";
+                        }
+                        return $result;
+                    }
+            ],
+             // 'vlan'
+            [
+                'attribute' => 'vlanName',
+                'label' => 'VLAN',
+                'format' => 'paragraphs',
+                'value' => function ($model) {
+                        $result = '';
+                        foreach ($model->vlans as $vlan) {
+                            $result .= $vlan->number . "\n\n";
+                        }
+                        return $result;
+                    }
+            ],
+            // 'device'
+            [
+                'attribute' => 'deviceName',
+                'label' => 'Device',
+                // 'format' => 'paragraphs',
+                'value' => function ($model) {
+                        $result = '';
+                        foreach ($model->ports as $port) {
+                            $result .= $port->device->mngIp->strip . "\n\n";
+                        }
+                        return $result;
+                    }
+            ],
+            // 'port'
+            [
+                'attribute' => 'portName',
+                'label' => 'Port',
+                'format' => 'paragraphs',
+                'value' => function ($model) {
+                        $result = '';
+                        foreach ($model->ports as $port) {
+                            $result .= $port->number . "\n\n";
+                        }
+                        return $result;
+                    }
             ],
 
             ['class' => 'yii\grid\ActionColumn'],

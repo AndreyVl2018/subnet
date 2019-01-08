@@ -18,7 +18,7 @@ class m181210_093102_create_port_table extends Migration
     {
         $this->createTable('port', [
             'id' => $this->primaryKey(),
-            'number' => $this->string(100),
+            'number' => $this->string(10),
             'device_id' => $this->integer(),
             'order_id' => $this->integer(),
             'status' => $this->integer(),
