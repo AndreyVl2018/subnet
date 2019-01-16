@@ -7,6 +7,14 @@ use yii\db\Migration;
  */
 class m181211_010308_create_parent_foreignkey extends Migration
 {
+
+/*  PRIMARY KEY (`id`),
+  INDEX `idx-device-area_id` (`area_id` ASC) VISIBLE,
+  INDEX `idx-device-mng_vlan_id` (`mng_vlan_id` ASC) VISIBLE,
+  INDEX `fk_device_ip1_idx` (`mng_ip_id` ASC) VISIBLE,
+  INDEX `fk_device_port1_idx` (`up_port_id` ASC) VISIBLE,
+*/
+
     /**
      * {@inheritdoc}
      */
@@ -20,7 +28,7 @@ class m181211_010308_create_parent_foreignkey extends Migration
         );
 
         // add foreign key for table `device`
-        $this->addForeignKey(
+/*        $this->addForeignKey(
             'fk-device-mng_ip_id',
             'device',
             'mng_ip_id',
@@ -29,7 +37,7 @@ class m181211_010308_create_parent_foreignkey extends Migration
             'NO ACTION',
             'NO ACTION'
         );
-
+*/
         // 2. creates index for column `parent_port_id`
         $this->createIndex(
             'idx-device-up_port_id',
@@ -38,7 +46,7 @@ class m181211_010308_create_parent_foreignkey extends Migration
         );
 
         // add foreign key for table `device`
-        $this->addForeignKey(
+/*        $this->addForeignKey(
             'fk-device-up_port_id',
             'device',
             'up_port_id',
@@ -47,7 +55,7 @@ class m181211_010308_create_parent_foreignkey extends Migration
             'NO ACTION',
             'NO ACTION'
         );
-        // 3. creates index for column `parent_vlan_id`
+*/        // 3. creates index for column `parent_vlan_id`
         $this->createIndex(
             'idx-device-mng_vlan_id',
             'device',

@@ -25,10 +25,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'iplong',
-            'subnet_id',
-            'order_id',
+            // 'id',
+            // 'iplong',
+            'strip',
+/*            [
+                'attribute' => 'INET_NTOA(iplong)',
+                'label' => 'Ip',
+                // 'format' => 'paragraphs',
+                'value' => 'strip'
+            ],
+*/            'subnet_id',
+            'orderName',
+            // 'order_id',
             'status',
 
             ['class' => 'yii\grid\ActionColumn'],

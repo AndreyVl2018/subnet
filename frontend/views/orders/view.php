@@ -29,13 +29,78 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            // 'id',
             'number',
             'abonent',
             'address',
             'description',
-            'service_id',
-        ],
+            [
+                'label' => 'Service',
+                'value' => $model->service->name,
+            ],
+            [
+                'label' => 'Device',
+                'format' => 'paragraphs',
+                'value' => function ($model) {
+                        $result = '';
+                        foreach ($model->ports as $port) {
+/*                            $result .= $port->device->mngIp->strip . "  (" . $port->device->description . ")\n\n";
+*/
+                            $result .= $port->nameDevice;
+
+                        }
+                        return $result;
+                    }
+            ],
+            [
+                'label' => 'Port',
+                'format' => 'paragraphs',
+                'value' => function ($model) {
+                        $result = '';
+                        foreach ($model->ports as $port) {
+                            $result .= $port->number . "\n\n";
+                        }
+                        return $result;
+                    }
+            ],
+            [
+                'label' => 'VLAN',
+                'format' => 'paragraphs',
+                'value' => function ($model) {
+                        $result = '';
+                        foreach ($model->vlans as $vlan) {
+                            $result .= $vlan->number . "\n\n";
+                        }
+                        return $result;
+                    }
+            ],
+            [
+                'label' => 'Ip',
+                'format' => 'paragraphs',
+                'value' => function ($model) {
+                        $result = '';
+                        foreach ($model->ips as $ip) {
+                            $result .= $ip->strip . "\n\n";
+                        }
+                        return $result;
+                    }
+            ],
+            [
+                'label' => 'Subnet',
+                'format' => 'paragraphs',
+                'value' => function ($model) {
+                        $result = '';
+                        foreach ($model->ips as $ip) {
+                            $result .= $ip->subnet->name . "\n\n";
+                        }
+                        return $result;
+                    }
+            ],
+/*            [
+                'label' => 'Service',
+                'value' => $model->service->name,
+            ],
+*/        ],
     ]) ?>
 
 </div>

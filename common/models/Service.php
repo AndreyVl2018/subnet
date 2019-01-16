@@ -15,6 +15,7 @@ use Yii;
  */
 class Service extends \yii\db\ActiveRecord
 {
+    public $arrService;
     /**
      * {@inheritdoc}
      */

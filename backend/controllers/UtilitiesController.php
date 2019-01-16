@@ -45,6 +45,8 @@ class UtilitiesController extends \yii\web\Controller
 		if (isset($_GET['st_vlan'])) $_HTML = importvlan();
 		if (isset($_GET['st_commutator'])) $_HTML = importcommutator();
 		if (isset($_GET['st_subnet'])) $_HTML = importsubnet();
+
+		// в order копируем из client
 		if (isset($_GET['st_client1'])) {
 		
 			$vardaclients = VardaClient::find()
@@ -60,12 +62,13 @@ class UtilitiesController extends \yii\web\Controller
 				$order->address = $value->client_address;
 				$order->description = $value->description;
 				// $order->number ;
-				// $order->service_id ;
+				$order->service_id = 1;
 				$order->save();
 			}
 			$_HTML .= '   Обновлено ' . $i . ' из ' . count($vardaclients) . ' записей.';
 		}
 
+		// в ip копируем из client
 		if (isset($_GET['st_client2'])) {
 			$vardaclients = VardaClient::find()
 		    ->orderBy('id')
@@ -87,6 +90,8 @@ class UtilitiesController extends \yii\web\Controller
 			}
 			$_HTML .= '   Обновлено ' . $i . ' из ' . count($vardaclients) . ' записей.';
 		}
+
+		// в port копируем из client
 		if (isset($_GET['st_client3'])) {
 				// port
 				// commutator
@@ -106,7 +111,7 @@ class UtilitiesController extends \yii\web\Controller
 			$_HTML .= '   Обновлено ' . $i . ' из ' . count($vardaclients) . ' записей.';
 		}
 				
-
+		// в vlan копируем из client
 		if (isset($_GET['st_client4'])) {
 			$vardaclients = VardaClient::find()
 		    ->orderBy('id')

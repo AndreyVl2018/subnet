@@ -11,6 +11,8 @@ use common\models\Ip;
  */
 class IpSearch extends Ip
 {
+    public $strip = '';
+    public $orderName = '';
     /**
      * {@inheritdoc}
      */
@@ -19,6 +21,7 @@ class IpSearch extends Ip
         return [
             [['id', 'subnet_id', 'order_id', 'status'], 'integer'],
             [['iplong'], 'number'],
+            [['strip','orderName'], 'safe'],
         ];
     }
 
@@ -48,6 +51,24 @@ class IpSearch extends Ip
             'query' => $query,
         ]);
 
+        $dataProvider->setSort([
+        'attributes' => [
+            'strip' => [
+                'asc' => ['iplong' => SORT_ASC],
+                'desc' => ['iplong' => SORT_DESC],
+                'label' => 'Ip',
+                'default' => SORT_ASC
+                ],
+            'orderName' => [
+                'asc' => ['order.abonent' => SORT_ASC, 'order.address' => SORT_ASC],
+                'desc' => ['order.abonent' => SORT_DESC, 'order.address' => SORT_DESC],
+                'label' => 'Abonent',
+                'default' => SORT_ASC
+                ],
+            ]
+        ]);
+
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -55,6 +76,9 @@ class IpSearch extends Ip
             // $query->where('0=1');
             return $dataProvider;
         }
+
+    // $this->addCondition($query, 'strip', true);
+
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -65,6 +89,12 @@ class IpSearch extends Ip
             'status' => $this->status,
         ]);
 
+        $query->andWhere(['like', 'INET_NTOA(iplong)', $this->strip]);
+ 
+        $query->joinWith('order');
+  
+        $query->andWhere('order.abonent LIKE "%' . $this->orderName . '%" '.'OR order.address LIKE "%' . $this->orderName . '%"');
+        
         return $dataProvider;
     }
 }

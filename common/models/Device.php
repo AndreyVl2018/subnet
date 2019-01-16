@@ -26,6 +26,11 @@ use Yii;
  */
 class Device extends \yii\db\ActiveRecord
 {
+    
+    public $arrDevice;
+    public $namedevice;
+    // public $device_id;
+
     /**
      * {@inheritdoc}
      */
@@ -108,4 +113,11 @@ class Device extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Port::className(), ['device_id' => 'id']);
     }
+
+        public function getNamedevice()
+    {
+        return $this->mngIp->strip . "  (" . $this->description . ")\n\n";
+    }
+
+
 }

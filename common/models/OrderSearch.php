@@ -11,11 +11,6 @@ use common\models\Order;
  */
 class OrderSearch extends Order
 {
-    public $ipName = '';
-    public $subnetName = '';
-    public $vlanName = '';
-    public $portName = '';
-    public $deviceName = '';
     /**
      * {@inheritdoc}
      */
@@ -23,7 +18,7 @@ class OrderSearch extends Order
     {
         return [
             [['id', 'service_id'], 'integer'],
-            [['number', 'abonent', 'address', 'description', 'ipName', 'subnetName', 'vlanName', 'portName', 'deviceName'], 'safe'],
+            [['number', 'abonent', 'address', 'description', 'ipName', 'subnetName', 'vlanName', 'portName', 'deviceName', 'serviceName'], 'safe'],
         ];
     }
 
@@ -53,14 +48,18 @@ class OrderSearch extends Order
             'query' => $query,
         ]);
  
-        $dataProvider->setSort([
+/*        $dataProvider->setSort([
             'attributes' => [
                 'abonent',
                 'address',
                 'description',
             ]
         ]);
-
+*/
+        $dataProvider->sort->attributes['abonent'] = [
+                    'asc' => ['abonent' => SORT_ASC],
+                    'desc' => ['abonent' => SORT_DESC,],
+                ];
 
         $query->joinWith('ips')->joinWith('ips.subnet');
         $dataProvider->sort->attributes['ipName'] = [
@@ -80,11 +79,12 @@ class OrderSearch extends Order
                     'desc' => ['port.number' => SORT_DESC,],
                 ];
 
-        $dataProvider->sort->attributes['deviceName'] = [
+                //сортировка по device ПОКА НЕ РАБОТАЕТ
+/*        $dataProvider->sort->attributes['deviceName'] = [
                     'asc' => ['port.device.mngIp.strip' => SORT_ASC],
                     'desc' => ['port.device.mngIp.strip' => SORT_DESC,],
                 ];
-
+*/
 
                 //сортировка по subnet ПОКА НЕ РАБОТАЕТ
 /*        $dataProvider->sort->attributes['subnetName'] = [
@@ -114,9 +114,9 @@ class OrderSearch extends Order
             ->andFilterWhere(['like', 'description', $this->description]);
 
 
-        $query->andWhere(['like', 'port.number', $this->portName])
-        ->andWhere(['like', 'INET_NTOA(ip.iplong)', $this->ipName])
-        ->andWhere(['like', 'vlan.number', $this->vlanName]);
+        $query->andFilterWhere(['like', 'port.number', $this->portName])
+        ->andFilterWhere(['like', 'INET_NTOA(ip.iplong)', $this->ipName])
+        ->andFilterWhere(['like', 'vlan.number', $this->vlanName]);
 
 
         return $dataProvider;

@@ -59,7 +59,7 @@ class Port extends \yii\db\ActiveRecord
      */
     public function getDevices()
     {
-        return $this->hasMany(Device::className(), ['up_port_id' => 'id']);
+        return $this->hasOne(Device::className(), ['up_port_id' => 'id']);
     }
 
     /**

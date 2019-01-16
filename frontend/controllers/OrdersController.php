@@ -10,6 +10,7 @@ use common\models\Subnet;
 use common\models\Device;
 use common\models\Port;
 use common\models\Vlan;
+use common\models\Service;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -71,12 +72,24 @@ class OrdersController extends Controller
     {
         $model = new Order();
 
+        $model_service = Service::find()->orderBy('name')->all();
+        foreach ($model_service as $value) {
+            $arrService[$value->id] = $value->name;
+        }
+
+        $model_device = Device::find()->all();
+        foreach ($model_device as $value) {
+            $arrDevice[$value->id] = $value->Namedevice;
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'arrService' => $arrService,
+            'arrDevice' => $arrDevice,
         ]);
     }
 
@@ -91,12 +104,24 @@ class OrdersController extends Controller
     {
         $model = $this->findModel($id);
 
+        $model_device = Device::find()->all();
+        foreach ($model_device as $value) {
+            $arrDevice[$value->id] = $value->mngIp->strip . "  (" . $value->description . ")\n\n";
+        }
+
+        $model_service = Service::find()->orderBy('name')->all();
+        foreach ($model_service as $value) {
+            $arrService[$value->id] = $value->name;
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'arrService' => $arrService,
+            'arrDevice' => $arrDevice,
         ]);
     }
 

@@ -48,6 +48,8 @@ class Ip extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'iplong' => 'Iplong',
+            'strip' => 'Ip',
+            'orderName' => 'Abonent',
             'subnet_id' => 'Subnet ID',
             'order_id' => 'Order ID',
             'status' => 'Status',
@@ -59,7 +61,7 @@ class Ip extends \yii\db\ActiveRecord
      */
     public function getDevices()
     {
-        return $this->hasMany(Device::className(), ['mng_ip_id' => 'id']);
+        return $this->hasOne(Device::className(), ['mng_ip_id' => 'id']);
     }
 
     /**
@@ -88,5 +90,9 @@ class Ip extends \yii\db\ActiveRecord
         $this->iplong = sprintf('%u', ip2long($value));
     }
 
+    public function getOrderName()
+    {
+        return $this->order->abonent.' ('.$this->order->address.')';
+    }
 
 }
