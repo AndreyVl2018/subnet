@@ -73,7 +73,7 @@ class OrderSearch extends Order
                     'desc' => ['vlan.number' => SORT_DESC,],
                 ];
 
-        $query->joinWith('ports');
+        $query->joinWith('ports')->joinWith('ports.device');
         $dataProvider->sort->attributes['portName'] = [
                     'asc' => ['port.number' => SORT_ASC],
                     'desc' => ['port.number' => SORT_DESC,],

@@ -25,7 +25,8 @@ class Order extends \yii\db\ActiveRecord
     public $subnetName = '';
     public $vlanName = '';
     public $portName = '';
-    public $deviceName = '';
+    public $portNumber;
+    public $deviceName;
     public $serviceName = '';
     /**
      * {@inheritdoc}
@@ -109,9 +110,19 @@ class Order extends \yii\db\ActiveRecord
         return $this->hasMany(Vlan::className(), ['order_id' => 'id']);
     }
 
+/*    public function getDeviceName()
+    {
+        foreach ($this->devices as $device) {
+            $result .= $device->nameDevice . "\n\n";
+            }
+        return $result;
+    }
+
+*/
     public function afterFind()
     {
-        return $this->deviceName = $this->device;
+
+        // return $this->deviceName = $this->device;
     }
 
 }

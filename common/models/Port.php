@@ -19,6 +19,8 @@ use Yii;
  */
 class Port extends \yii\db\ActiveRecord
 {
+    public $arrPort;
+
     /**
      * {@inheritdoc}
      */

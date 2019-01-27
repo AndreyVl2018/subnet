@@ -83,7 +83,7 @@ class OrdersController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -102,12 +102,13 @@ class OrdersController extends Controller
      */
     public function actionUpdate($id)
     {
+
         $model = $this->findModel($id);
 
-        $model_device = Device::find()->all();
-        foreach ($model_device as $value) {
-            $arrDevice[$value->id] = $value->mngIp->strip . "  (" . $value->description . ")\n\n";
-        }
+
+// ***************************************
+// return $this->redirect(['view', 'id' => $model->id]); //ЗАГЛУШКА
+// ***************************************
 
         $model_service = Service::find()->orderBy('name')->all();
         foreach ($model_service as $value) {
@@ -121,8 +122,9 @@ class OrdersController extends Controller
         return $this->render('update', [
             'model' => $model,
             'arrService' => $arrService,
-            'arrDevice' => $arrDevice,
-        ]);
+            // 'arrDevice' => $arrDevice,
+            // 'arrPort' => $arrPort,
+         ]);
     }
 
     /**
@@ -154,4 +156,26 @@ class OrdersController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+        public function actionPortlist($id) {
+            $countPort = Port::find()
+                ->where(['device_id' => $id])
+                ->count();
+            $ports = Port::find()
+                ->where(['device_id' => $id])
+                ->orderBy('number ASC')
+                ->all();
+            if ($countPort > 0) {
+                # code...
+                echo "<option>Select...</option>";
+                foreach ($ports as $port) {
+                    # code...
+                    echo "<option value='".$port->id."'>".$port->number."</option>";
+                }
+            } else {
+                echo "<option> - </option>";
+            }
+    } 
 }
+
+

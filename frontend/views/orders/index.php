@@ -72,11 +72,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 // 'attribute' => 'deviceName',
                 'label' => 'Device',
-                // 'format' => 'paragraphs',
+                'format' => 'paragraphs',
                 'value' => function ($model) {
                         $result = '';
                         foreach ($model->devices as $device) {
-                            // $result .= $port->device->mngIp->strip . "\n\n";
                             $result .= $device->nameDevice . "\n\n";
                         }
                         return $result;

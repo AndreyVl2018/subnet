@@ -43,11 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'paragraphs',
                 'value' => function ($model) {
                         $result = '';
-                        foreach ($model->ports as $port) {
-/*                            $result .= $port->device->mngIp->strip . "  (" . $port->device->description . ")\n\n";
-*/
-                            $result .= $port->nameDevice;
-
+                        foreach ($model->devices as $device) {
+                            $result .= $device->nameDevice . "\n\n";
                         }
                         return $result;
                     }
@@ -96,11 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return $result;
                     }
             ],
-/*            [
-                'label' => 'Service',
-                'value' => $model->service->name,
-            ],
-*/        ],
+        ],
     ]) ?>
 
 </div>
