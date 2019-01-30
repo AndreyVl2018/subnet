@@ -110,18 +110,13 @@ class OrdersController extends Controller
 // return $this->redirect(['view', 'id' => $model->id]); //ЗАГЛУШКА
 // ***************************************
 
-        $model_service = Service::find()->orderBy('name')->all();
-        foreach ($model_service as $value) {
-            $arrService[$value->id] = $value->name;
-        }
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
-            'arrService' => $arrService,
+            // 'arrService' => $arrService,
             // 'arrDevice' => $arrDevice,
             // 'arrPort' => $arrPort,
          ]);
@@ -157,25 +152,28 @@ class OrdersController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-        public function actionPortlist($id) {
-            $countPort = Port::find()
-                ->where(['device_id' => $id])
-                ->count();
-            $ports = Port::find()
-                ->where(['device_id' => $id])
-                ->orderBy('number ASC')
-                ->all();
-            if ($countPort > 0) {
-                # code...
-                echo "<option>Select...</option>";
-                foreach ($ports as $port) {
-                    # code...
+    public function actionPortlist($id) {
+        $countPort = Port::find()
+            ->where(['device_id' => $id])
+            ->count();
+        $ports = Port::find()
+            ->where(['device_id' => $id])
+            ->orderBy('number ASC')
+            ->all();
+        if ($countPort > 0) {
+            foreach ($ports as $port) {
+                if (!empty($port->order_id) && $port->order_id != $this->id) {
+                    echo "<option disabled='disabled' value='".$port->id."'>".$port->number."</option>";
+                } else {
                     echo "<option value='".$port->id."'>".$port->number."</option>";
                 }
-            } else {
-                echo "<option> - </option>";
             }
+        } else {
+            echo "<option> - </option>";
+        }
+        echo "<option value=0>Add port...</option>";
     } 
+
 }
 
 

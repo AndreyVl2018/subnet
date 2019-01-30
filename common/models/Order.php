@@ -110,19 +110,17 @@ class Order extends \yii\db\ActiveRecord
         return $this->hasMany(Vlan::className(), ['order_id' => 'id']);
     }
 
-/*    public function getDeviceName()
-    {
-        foreach ($this->devices as $device) {
-            $result .= $device->nameDevice . "\n\n";
-            }
-        return $result;
-    }
 
-*/
-    public function afterFind()
-    {
-
-        // return $this->deviceName = $this->device;
+    public function afterSave($insert, $changedAttributes){
+        parent::afterSave($insert, $changedAttributes);
+     
+        if (!empty($this->ports)) {
+            $this->unlink('ports', $this->ports[0]);
+        };
+        // $port = Port::findOne(['id' => $this->portNumber]);
+        // $port = Port::findOne(27843);
+        $port = Port::findOne(['id' => $_POST['Order']['portNumber']]);
+        $port->link('order', $this);
     }
 
 }
